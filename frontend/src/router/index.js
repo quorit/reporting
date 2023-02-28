@@ -71,7 +71,7 @@ const router = new VueRouter({
 const config_data = JSON.parse(process.env.VUE_APP_CONFIG_DATA);
 
 const authsystem_path = config_data.vue_app_path_roots.authsystem;
-
+const login_portal_info = config_data.login_portal_info;
 
 router.beforeEach(async (to,from,next) => {
     function next_login(){
@@ -83,22 +83,29 @@ router.beforeEach(async (to,from,next) => {
         }else{
             type = to.params.type
         }
-        next({
-            name: "login",
-            params: {
-                type: type
-            }
-        });
+        const server_root = login_portal_info.server_root;
+        const page_map = login_portal_info.page_maps[type];
+        const login_url=server_root+page_map
+        location.replace(login_url)
+
     }
 
     
+
 
     if((to.name == 'reporting_request_forms' || to.name == 'reporting_support_form')){
 
 
         try{
+            const access_token=(to.query)["access-token"];
+            console.log(access_token);
             console.log("Did you even get here?")
-            const json_data = await authsystem_network.get_app_token(authsystem_path,"reporting");
+            var json_data;
+            if(access_token){
+                json_data = await authsystem_network.get_app_token(authsystem_path,"reporting",access_token)
+            }else{
+                json_data = await authsystem_network.get_app_token(authsystem_path,"reporting");
+            }
             const user_data=json_data.user_data;
             console.log("HI not yas");
             console.log(user_data);
@@ -133,8 +140,6 @@ router.beforeEach(async (to,from,next) => {
             }else{
 
                 const error_params=get_error_params(e);
-                console.log(e);
-                console.log("FUCKAGE");
                 next( {                    
                     name: "error_page",
                     params: error_params

@@ -131,7 +131,3 @@ if [[ "$devel_mode" -eq 0 ]]; then
 
 fi
 
-if [[ "$devel_mode" -eq 1 ]]; then
-    pip install --force-reinstall "git+https://github.com/danvk/RangeHTTPServer"
-    #not installing from pip because the pip version is not up do date and only runs on port 8000
-fi
