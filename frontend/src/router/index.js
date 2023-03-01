@@ -138,6 +138,7 @@ router.beforeEach(async (to,from,next) => {
                 next_login();
                 return;
             }else{
+                console.log("Failed to acquire app token with error: " + e);
 
                 const error_params=get_error_params(e);
                 next( {                    
