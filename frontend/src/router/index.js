@@ -100,6 +100,7 @@ router.beforeEach(async (to,from,next) => {
             const access_token=(to.query)["access-token"];
             console.log(access_token);
             console.log("Did you even get here?")
+            console.log("Authsystem path is: "+ authsystem_path)
             var json_data;
             if(access_token){
                 json_data = await authsystem_network.get_app_token(authsystem_path,"reporting",access_token)
