@@ -86,7 +86,7 @@ export default {
     }
 
   },
-  mounted: async function(){
+  beforeCreate: async function(){
     try { 
       await this.$store.dispatch('set_init_data');
     } catch(e) {

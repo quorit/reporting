@@ -4,7 +4,6 @@ import TicketInfo from '../views/TicketInfo.vue'
 import ReportingForm from '../views/Reporting.vue'
 import RptSupport from '../views/RptSupport.vue'
 import ErrorPage from '../views/ErrorPage.vue'
-import LoginForm from '../views/Login.vue'
 
 const authsystem_network = require ("authsystem_network");
 import {get_error_params} from '../js_extra/web_project_error.js'
@@ -29,11 +28,6 @@ const routes = [
         path: '/forms/:type(admissions|student)',
         component: ReportingForm,
         name: "reporting_request_forms"
-    },
-    {
-        path: '/login/:type(admissions|student|rptsupport)',
-        component: LoginForm,
-        name: "login"
     },
     {
         path: '/forms/:type(rptsupport)',
