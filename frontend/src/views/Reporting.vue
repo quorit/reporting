@@ -1,5 +1,5 @@
 <template>
-   <FormShell
+   <FormShell v-if="$store.state.init_data"
     :clear-func="clear_func"
     :heading="$route.params.type.charAt(0).toUpperCase() + $route.params.type.slice(1) + ' data request'"
     :submission-data="submission_data"
@@ -330,7 +330,6 @@ import DateMenu from '../components/DateMenu.vue'
 import TermSelect from '../components/TermSelect.vue'
 import FormShell from '../components/FormShell.vue'
 import RptFileInput from '../components/FileInput.vue'
-
 import {get_strm_bounds, get_current_term, is_n_busdays_hence} from '../js_extra/utils.js';
 
 
@@ -363,9 +362,7 @@ export default {
          list_choices[list_forms[i]]=[];
       }
 
-      const field_list_codes = this.$store.state.init_data.standard_fields[route_type];
-      const field_defs = this.$store.state.init_data.field_defs;
-      const field_list = field_list_codes.map(code => field_defs[code]);
+      
 
       return {
          response_text: '',
@@ -426,7 +423,6 @@ export default {
                             }
                         }
          ],
-         field_list: field_list,
          route_type: route_type,
          files: [],
          da_dialog: true,
@@ -478,6 +474,15 @@ export default {
 
    },
    computed:{
+
+      field_list: function(){
+         const route_type=this.$route.params.type;
+         const field_list_codes = this.$store.state.init_data.standard_fields[route_type];
+         const field_defs = this.$store.state.init_data.field_defs;
+         return field_list_codes.map(code => field_defs[code]);
+      },
+
+
       submission_display: function() {
          return this.submission_data();
       },

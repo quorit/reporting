@@ -1,5 +1,5 @@
 <template>
-   <FormShell
+   <FormShell v-if="init_data"
    :clear-func="clear_func"
     heading="Data and Data support request"
     :submission-data="submission_data"
@@ -115,7 +115,6 @@ export default {
     RptFileInput
 },
    data: function() {
-      
       return {
          requestor_name: this.$store.state.user_data.real_name,
          requestor_dept: '',
@@ -140,7 +139,8 @@ export default {
          ],
          support_request_descr: '',
          source_choice: null,
-         files: []
+         files: [],
+         //init_data: this.$store.state.init_data
       };
    },
    methods: {
@@ -165,6 +165,11 @@ export default {
 
    },
    computed:{
+      init_data: function(){
+         return this.$store.state.init_data;
+      },
+
+
       submission_display: function() {
          return this.submission_data();
       },
@@ -195,10 +200,6 @@ export default {
          content_data.attachments=this.files;
          return content_data;
       },
-
-      init_data: function(){
-         return this.$store.state.init_data;
-      }
 
       
    },
