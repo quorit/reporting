@@ -27,7 +27,7 @@
             "QIB": "BISC ConEd/Arts (QIB)",
             "QIF": "BISC ConEd/Science (QIF)"
         },
-        "FEAS":{
+        "QSE":{
             "QE": "Engineering (QE)",
             "QEC": "Engineering, Elec & Comp (QEC)",
             "QEM": "Mechatronic and Robotics (QEM)"
@@ -136,8 +136,8 @@
                 }
             }
         },
-        "FEAS":{
-            "longhand": "Faculty of Engineering & Applied Science",
+        "QSE":{
+            "longhand": "Smith Engineering",
             "progs": {
                 "degree": {
                     "longhand": "Engineering Degree",
